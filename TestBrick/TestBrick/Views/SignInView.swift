@@ -68,19 +68,25 @@ extension SignInView {
     }
     
     var textFieldForEmail: some View {
-        TextField("ENTER EMAIL", text: $email)
-        //              $.textFieldStyle(PlainTextFieldStyle())
-        // .padding()
-            .font(.system(.body, design: .monospaced))
-            .foregroundColor(.blue)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.white, lineWidth: 1)
-            )
-        
-            .padding(.horizontal)
-        
+        ZStack(alignment: .leading) {
+                    if email.isEmpty {
+                        Text("ENTER EMAIL")
+                            .font(.system(.title3, design: .monospaced))
+                            .foregroundColor(.white)
+                            .padding(.leading, 30)
+                    }
+
+                    TextField("", text: $email)
+                        .font(.system(.body, design: .monospaced))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.white, lineWidth: 1)
+                        )
+                        .padding(.horizontal)
+                }
+             
     }
     
     var signInButton: some View {
