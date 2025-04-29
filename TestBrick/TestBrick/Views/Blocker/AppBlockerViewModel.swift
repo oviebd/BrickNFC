@@ -17,6 +17,8 @@ class AppBlockerViewModel: ObservableObject {
     @Published var alertMessage : String = ""
     @Published var showAlert : Bool = false
     
+    @Published var canBlock : Bool = false
+    
     init () {
         loadBlockingState()
         loadSelectedApps()
@@ -73,9 +75,14 @@ class AppBlockerViewModel: ObservableObject {
 //        }
 //    }
     
+    func onUpdateSelectedApps(){
+        canBlock = selectedApps.applications.count > 0 || selectedApps.categories.count > 0
+    }
+    
     func saveSelectedApps() {
         if let data = try? JSONEncoder().encode(selectedApps) {
             UserDefaults.standard.set(data, forKey: "selectedApps")
+            onUpdateSelectedApps()
         }
     }
     
@@ -83,7 +90,10 @@ class AppBlockerViewModel: ObservableObject {
         if let data = UserDefaults.standard.data(forKey: "selectedApps"),
            let savedSelection = try? JSONDecoder().decode(FamilyActivitySelection.self, from: data) {
             selectedApps = savedSelection
+            onUpdateSelectedApps()
         }
+        
+       
     }
     
     private func loadBlockingState() {
@@ -125,5 +135,6 @@ class AppBlockerViewModel: ObservableObject {
         
         alertMessage = "All apps are now unblocked"
         showAlert = true
+       
     }
 }
