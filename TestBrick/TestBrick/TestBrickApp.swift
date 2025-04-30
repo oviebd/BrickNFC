@@ -17,8 +17,8 @@ struct TestBrickApp: App {
         WindowGroup {
             //ContentView()
            // AppBlockerView()
-            
-            WhatGetsView()
+            SignInView()
+          //  WhatGetsView()
                 .environmentObject(appBlocker)
         }
     }
