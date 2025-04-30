@@ -9,11 +9,17 @@ import SwiftUI
 
 @main
 struct TestBrickApp: App {
-    
+
+
+    @StateObject private var appBlocker = AppBlocker()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //ContentView()
+           // AppBlockerView()
+            
+            WhatGetsView()
+                .environmentObject(appBlocker)
         }
     }
 }
