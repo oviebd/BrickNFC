@@ -8,30 +8,36 @@
 import SwiftUI
 
 struct SignInView: View {
-            @State private var email: String = ""
-
+         @State private var email: String = ""
+         @State private var goToWelcomeView: Bool = false
+    
             var body: some View {
-                VStack(spacing: 25) {
-                  
-                    arrowAndtitle
+                NavigationStack {
+                    VStack(spacing: 25) {
+                        
+                        arrowAndtitle
+                        
+                        description
+                        
+                        Spacer()
+                        
+                        textFieldForEmail
+                        
+                        signInButton
+                        Spacer()
+                        
+                        
+                    }
                     
-                    description
+                    .navigationDestination(isPresented: $goToWelcomeView) {
+                        WelcomeView()
+                    }
                     
-                    Spacer()
-                    
-                    textFieldForEmail
-                    
-                    signInButton
-                    
-
-                    textButton
-                 
-                    Spacer()
+                    .padding(.top, 40)
+                    .background(Color.darkGray.ignoresSafeArea())
 
                     
                 }
-                .padding(.top, 40)
-                .background(Color.darkGray.ignoresSafeArea())
             }
         }
 
@@ -43,18 +49,17 @@ struct SignInView: View {
 extension SignInView {
     
     var arrowAndtitle: some View {
-        HStack(alignment: .center, spacing: 50) {
-            // Spacer()
-            Image(systemName: "arrow.left")
-                .font(.system(size: 30).bold())
-            
+        HStack(alignment: .center) {
+          
+//            Image(systemName: "arrow.left")
+//                .font(.system(size: 30).bold())
+//            
             Text("SIGN IN")
                 .font(.system(.largeTitle, design: .monospaced))
                 .bold()
-            
         }
         .foregroundColor(.white)
-        .padding(.trailing, 50)
+      
         
     }
     
@@ -91,6 +96,7 @@ extension SignInView {
     
     var signInButton: some View {
         Button(action: {
+            goToWelcomeView = true
             
         }) {
             Text("SIGN IN")
@@ -104,17 +110,17 @@ extension SignInView {
         .padding(.horizontal)
     }
     
-    var textButton: some View {
-        Button(action: {
-            // Show explanation
-        }) {
-            Text("WHY DO WE HAVE ACCOUNTS?")
-                .font(.system(.subheadline, design: .monospaced))
-                .italic()
-                .foregroundColor(.gray)
-                .underline()
-        }
-        
-    }
-    
+//    var textButton: some View {
+//        Button(action: {
+//            // Show explanation
+//        }) {
+//            Text("WHY DO WE HAVE ACCOUNTS?")
+//                .font(.system(.subheadline, design: .monospaced))
+//                .italic()
+//                .foregroundColor(.gray)
+//                .underline()
+//        }
+//        
+//    }
+//    
 }

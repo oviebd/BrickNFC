@@ -21,6 +21,7 @@ struct WhatGetsView: View {
         
         .padding(.top, 40)
         .background(Color.darkGray.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
     }
 }
 
