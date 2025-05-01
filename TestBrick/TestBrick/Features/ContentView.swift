@@ -15,6 +15,8 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Group {
+                
+               // SignInView()
                 if isInBlockingState {
                     LockUnlockView()
                 } else {
