@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct LockView: View {
-    
     @EnvironmentObject private var appBlocker: AppBlocker
 
     @StateObject private var nfcReader = NFCReader()
     @StateObject private var appBlockerVM = AppBlockerViewModel()
     @StateObject var vm = LockUnlockVM()
-    
+
     var body: some View {
         ZStack {
             Color.darkGray.ignoresSafeArea()
 
             VStack(spacing: 30) {
                 topView
+
+                Spacer()
+                    .frame(height: 10)
                 detalis
 
                 Spacer()
@@ -31,7 +33,7 @@ struct LockView: View {
 
                 Spacer()
             }
-            .padding(.top, 40)
+            // .padding(.top, 40)
             .task {
                 await appBlockerVM.requestAuthorization()
             }
@@ -40,19 +42,18 @@ struct LockView: View {
 }
 
 extension LockView {
-    
     func scanTag() {
         appBlockerVM.setBlocking(isBlock: false)
         return
-       
-        nfcReader.scan { payload in
-            let isValid = vm.isValidTag(tag: payload)
-            if isValid {
-                appBlockerVM.setBlocking(isBlock: false)
-            }else{
-                vm.alertMessae = "Wrong Tag!. Please use valid tag"
-            }
-        }
+
+                nfcReader.scan { payload in
+                    let isValid = vm.isValidTag(tag: payload)
+                    if isValid {
+                        appBlockerVM.setBlocking(isBlock: false)
+                    } else {
+                        vm.alertMessae = "Wrong Tag!. Please use valid tag"
+                    }
+                }
     }
 }
 
@@ -63,23 +64,24 @@ extension LockView {
 extension LockView {
     var topView: some View {
         HStack(alignment: .center, spacing: 50) {
-            Image(systemName: "arrow.left")
-                .font(.system(size: 30))
-
-            Text(" DEACTIVATE\nYOUR BRICK")
+            Text("DEACTIVATE\nYOUR BRICK")
                 .font(.system(.largeTitle, design: .monospaced))
                 .bold()
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal)
         }
+
         .foregroundColor(.white)
-        .padding(.trailing, 60)
     }
 
     var detalis: some View {
-        Text(" Tap the button below, and then\n  tap the top of your phone to\n    your Brick to activate.")
+        Text(" Tap the button below, and then\ntap the top of your phone to\nyour Brick to activate.")
             .font(.system(.body, design: .monospaced))
             .foregroundColor(.white.opacity(0.8))
-            .multilineTextAlignment(.leading)
+            .multilineTextAlignment(.center)
             .padding(.horizontal)
+            .frame(maxWidth: .infinity, alignment: .center)
     }
 
     var acitvateButton: some View {
@@ -99,7 +101,6 @@ extension LockView {
 
     var brickButton: some View {
         Button(action: {
-           
         }) {
             Text("Don't have a Brick?")
                 .font(.system(.subheadline, design: .monospaced))

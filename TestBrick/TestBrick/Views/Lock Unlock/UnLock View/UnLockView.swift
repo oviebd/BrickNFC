@@ -24,6 +24,8 @@ struct UnLockView: View {
 
             VStack(spacing: 30) {
                 topView
+                Spacer()
+                    .frame(height: 10)
                 detalis
 
                 Spacer()
@@ -34,7 +36,7 @@ struct UnLockView: View {
 
                 Spacer()
             }
-            .padding(.top, 40)
+           // .padding(.top, 40)
         } .task {
             await appBlockerVM.requestAuthorization()
         }
@@ -63,22 +65,25 @@ extension UnLockView {
 extension UnLockView {
     var topView: some View {
         HStack(alignment: .center, spacing: 50) {
-            Image(systemName: "arrow.left")
-                .font(.system(size: 30))
+           
 
             Text("ACTIVATE\nYOUR BRICK")
                 .font(.system(.largeTitle, design: .monospaced))
                 .bold()
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal)
         }
         .foregroundColor(.white)
-        .padding(.trailing, 60)
+      
     }
 
     var detalis: some View {
-        Text(" Tap the button below, and then\n  tap the top of your phone to\n    your Brick to activate.")
+        Text(" Tap the button below, and then\ntap the top of your phone to\nyour Brick to activate.")
             .font(.system(.body, design: .monospaced))
             .foregroundColor(.white.opacity(0.8))
-            .multilineTextAlignment(.leading)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity, alignment: .center)
             .padding(.horizontal)
     }
 

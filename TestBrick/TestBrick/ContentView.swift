@@ -8,18 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    //Test
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                NavigationLink("Go to Detail", destination: DetailView())
+            }
+            .navigationTitle("Home")
         }
-        .padding()
+        .tint(.red) // Still apply here
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationStack{
+        ContentView()
+    }
+    }
+   
+
+struct DetailView: View {
+    var body: some View {
+        Text("Detail View")
+            .navigationTitle("Detail")
+            .navigationBarBackButtonHidden(false)
+           // .tint(.red) // THIS is crucial – apply tint inside the destination
+    }
 }
+
