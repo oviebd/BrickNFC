@@ -13,7 +13,7 @@ struct LockUnlockView: View {
     @StateObject private var nfcReader = NFCReader()
 
     @StateObject private var appBlockerVM = AppBlockerViewModel()
-    @AppStorage("isBlocking") private var isBlocking: Bool = true
+    @AppStorage(AppConstants.UserDefaultsKeys.isBlocking) private var isBlocking: Bool = true
     @Environment(\.dismiss) private var dismiss
     @State private var goToWhatGetsView: Bool = false
 //    @StateObject var vm = SecondVM()
@@ -33,7 +33,7 @@ struct LockUnlockView: View {
             }
         }
         .navigationDestination(isPresented: $goToWhatGetsView) {
-            WhatGetsView()
+            AppSelectionView()
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -43,7 +43,7 @@ struct LockUnlockView: View {
                     // goToWhatGetsView = true
                 }) {
                     
-                    CustomTopToolbar(showBackButton: true)
+                    CustomTopToolbar(showBackButton: !isBlocking)
                     
                    
                 }

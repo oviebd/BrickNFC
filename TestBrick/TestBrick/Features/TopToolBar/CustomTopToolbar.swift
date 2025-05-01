@@ -9,16 +9,15 @@ import SwiftUI
 
 struct CustomTopToolbar: View {
     @Environment(\.dismiss) private var dismiss
-    
+
     // Customizable inputs
     var showBackButton: Bool = true
-   // var icon: Image? = nil
+    // var icon: Image? = nil
     var title: String? = nil
     var backAction: (() -> Void)? = nil
-    
+
     var body: some View {
         HStack(spacing: 12) {
-            
             // Back Button
             if showBackButton {
                 Button(action: {
@@ -41,8 +40,6 @@ struct CustomTopToolbar: View {
                 }
             }
         }
-      //  .padding(.horizontal, 16)
-       // .padding(.vertical, 10)
         .background(Color.clear)
     }
 }
@@ -59,4 +56,3 @@ struct CustomTopToolbar: View {
     }
     .ignoresSafeArea(edges: .top)
 }
-

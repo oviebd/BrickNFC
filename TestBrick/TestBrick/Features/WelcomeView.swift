@@ -24,14 +24,14 @@ struct WelcomeView: View {
         }
 
         .navigationDestination(isPresented: $goToWhatGetsView) {
-            WhatGetsView()
+            AppSelectionView()
         }
 
         .navigationBarBackButtonHidden(true)
         .background(Color.darkGray.ignoresSafeArea())
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                CustomTopToolbar(showBackButton: true)
+                CustomTopToolbar(showBackButton: false)
             }
         }
     }

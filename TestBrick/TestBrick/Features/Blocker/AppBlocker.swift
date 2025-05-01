@@ -13,6 +13,8 @@ class AppBlocker: ObservableObject {
     @Published var isBlocking = false
     @Published var isAuthorized = false
     
+    let appBlockingUserDefaultDataManager = AppBlockerUserDefaultDataManager.shared
+    
     init() {
         loadBlockingState()
         Task {
@@ -42,7 +44,7 @@ class AppBlocker: ObservableObject {
         
         isBlocking.toggle()
         saveBlockingState()
-        applyBlockingSettings()
+       // applyBlockingSettings()
 //        applyBlockingSettings(for: profile)
     }
     
@@ -71,10 +73,10 @@ class AppBlocker: ObservableObject {
     }
     
     private func loadBlockingState() {
-        isBlocking = UserDefaults.standard.bool(forKey: "isBlocking")
+        isBlocking = appBlockingUserDefaultDataManager.isBlockingEnabled()
     }
-    
+//    
     private func saveBlockingState() {
-        UserDefaults.standard.set(isBlocking, forKey: "isBlocking")
+        appBlockingUserDefaultDataManager.setBlockingEnabled(isBlocking)
     }
 }

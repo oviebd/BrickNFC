@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct WhatGetsView: View {
+struct AppSelectionView: View {
+   
     @StateObject private var viewModel = AppBlockerViewModel()
     @State private var showPicker = false
     @State private var goToLockUnLockView: Bool = false
@@ -31,8 +32,6 @@ struct WhatGetsView: View {
             LockUnlockView()
         }
 
-        
-
         .background(Color.darkGray.ignoresSafeArea())
 
         .navigationBarBackButtonHidden(true)
@@ -51,11 +50,11 @@ struct WhatGetsView: View {
 
 #Preview {
     NavigationStack {
-        WhatGetsView()
+        AppSelectionView()
     }
 }
 
-extension WhatGetsView {
+extension AppSelectionView {
     var arrowAndtitle: some View {
         VStack {
             Text("WHAT GETS")
