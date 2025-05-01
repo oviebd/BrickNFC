@@ -9,12 +9,14 @@ import SwiftUI
 
 struct LockUnlockView: View {
     @EnvironmentObject private var appBlocker: AppBlocker
-
+    @Environment(\.dismiss) private var dismiss
+    
+    
     @StateObject private var nfcReader = NFCReader()
 
     @StateObject private var appBlockerVM = AppBlockerViewModel()
-    @AppStorage(AppConstants.UserDefaultsKeys.isBlocking) private var isBlocking: Bool = true
-    @Environment(\.dismiss) private var dismiss
+    @AppStorage(AppConstants.UserDefaultsKeys.isBlocking) private var isBlocking: Bool = false
+   
     @State private var goToWhatGetsView: Bool = false
 //    @StateObject var vm = SecondVM()
 
