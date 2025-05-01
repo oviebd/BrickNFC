@@ -38,7 +38,7 @@ struct LockView: View {
             // .padding(.top, 40)
             .task {
                 await appBlockerVM.requestAuthorization()
-            }.onAppear{
+            }.onAppear {
                 countDownVM.startOrResumeTimer()
             }
         }
@@ -47,17 +47,17 @@ struct LockView: View {
 
 extension LockView {
     func scanTag() {
-        appBlockerVM.setBlocking(isBlock: false)
-        return
+//        appBlockerVM.setBlocking(isBlock: false)
+//        return
 
-                nfcReader.scan { payload in
-                    let isValid = vm.isValidTag(tag: payload)
-                    if isValid {
-                        appBlockerVM.setBlocking(isBlock: false)
-                    } else {
-                        vm.alertMessae = "Wrong Tag!. Please use valid tag"
-                    }
-                }
+        nfcReader.scan { payload in
+            let isValid = vm.isValidTag(tag: payload)
+            if isValid {
+                appBlockerVM.setBlocking(isBlock: false)
+            } else {
+                vm.alertMessae = "Wrong Tag!. Please use valid tag"
+            }
+        }
     }
 }
 
@@ -78,7 +78,7 @@ extension LockView {
 
         .foregroundColor(.white)
     }
-    
+
     var timerView: some View {
         HStack(alignment: .center, spacing: 50) {
             Text("Elapsed Time:\n\(countDownVM.formatTime(countDownVM.elapsedTime))")

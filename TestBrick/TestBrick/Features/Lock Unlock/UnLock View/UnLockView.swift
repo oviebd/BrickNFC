@@ -43,8 +43,8 @@ struct UnLockView: View {
 
 extension UnLockView {
     func scanTag() {
-        appBlockerVM.setBlocking(isBlock: true)
-        return
+//        appBlockerVM.setBlocking(isBlock: true)
+//        return
         nfcReader.scan { payload in
             let isValid = vm.isValidTag(tag: payload)
             if isValid {
