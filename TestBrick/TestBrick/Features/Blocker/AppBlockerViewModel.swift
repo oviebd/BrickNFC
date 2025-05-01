@@ -19,6 +19,8 @@ class AppBlockerViewModel: ObservableObject {
     
     @Published var canBlock : Bool = false
     
+    let appBlockingUserDefaultDataManager = AppBlockerUserDefaultDataManager.shared
+    
     init () {
         loadBlockingState()
         loadSelectedApps()
@@ -56,24 +58,7 @@ class AppBlockerViewModel: ObservableObject {
         }
         
     }
-    
-//    func toggleBlocking() {
-//        guard isAuthorized else {
-//            //print("Not authorized to block apps")
-//            alertMessage = "Not authorized to block apps"
-//            showAlert = true
-//            return
-//        }
-//        
-//        isBlocking.toggle()
-//        saveBlockingState()
-//        
-//        if isBlocking {
-//            blockSelectedApps()
-//        }else{
-//            unblockApps()
-//        }
-//    }
+
     
     func onUpdateSelectedApps(){
         canBlock = selectedApps.applications.count > 0 || selectedApps.categories.count > 0
@@ -97,11 +82,11 @@ class AppBlockerViewModel: ObservableObject {
     }
     
     private func loadBlockingState() {
-        isBlocking = UserDefaults.standard.bool(forKey: "isBlocking")
+        isBlocking = appBlockingUserDefaultDataManager.isBlockingEnabled()
     }
     
     private func saveBlockingState() {
-        UserDefaults.standard.set(isBlocking, forKey: "isBlocking")
+        appBlockingUserDefaultDataManager.setBlockingEnabled(isBlocking)
     }
     
     func blockSelectedApps() {

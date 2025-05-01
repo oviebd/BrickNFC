@@ -14,9 +14,7 @@ struct UnLockView: View {
     @StateObject private var nfcReader = NFCReader()
     @StateObject private var appBlockerVM = AppBlockerViewModel()
    
-
     @StateObject var vm = LockUnlockVM()
-    
     
     var body: some View {
         ZStack {

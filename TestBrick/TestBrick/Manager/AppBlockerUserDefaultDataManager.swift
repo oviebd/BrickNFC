@@ -24,7 +24,7 @@ final class AppBlockerUserDefaultDataManager {
         return store.get(forKey: isBlockingKey, as: Bool.self) ?? false
     }
 
-    func removeBlockingStatus() {
-        store.remove(forKey: isBlockingKey)
-    }
+//    func removeBlockingStatus() {
+//        store.remove(forKey: isBlockingKey)
+//    }
 }
