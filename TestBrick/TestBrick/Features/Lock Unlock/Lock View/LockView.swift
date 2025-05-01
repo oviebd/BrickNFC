@@ -13,6 +13,7 @@ struct LockView: View {
     @StateObject private var nfcReader = NFCReader()
     @StateObject private var appBlockerVM = AppBlockerViewModel()
     @StateObject var vm = LockUnlockVM()
+    @StateObject private var countDownVM = CountdownTimerViewModel()
 
     var body: some View {
         ZStack {
@@ -27,6 +28,7 @@ struct LockView: View {
 
                 Spacer()
                 acitvateButton
+                timerView
 
                 Spacer()
                 brickButton
@@ -36,6 +38,8 @@ struct LockView: View {
             // .padding(.top, 40)
             .task {
                 await appBlockerVM.requestAuthorization()
+            }.onAppear{
+                countDownVM.startOrResumeTimer()
             }
         }
     }
@@ -65,6 +69,19 @@ extension LockView {
     var topView: some View {
         HStack(alignment: .center, spacing: 50) {
             Text("DEACTIVATE\nYOUR BRICK")
+                .font(.system(.largeTitle, design: .monospaced))
+                .bold()
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal)
+        }
+
+        .foregroundColor(.white)
+    }
+    
+    var timerView: some View {
+        HStack(alignment: .center, spacing: 50) {
+            Text("Elapsed Time:\n\(countDownVM.formatTime(countDownVM.elapsedTime))")
                 .font(.system(.largeTitle, design: .monospaced))
                 .bold()
                 .multilineTextAlignment(.center)

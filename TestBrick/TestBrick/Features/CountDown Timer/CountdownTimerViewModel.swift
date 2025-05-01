@@ -27,12 +27,12 @@ final class CountdownTimerViewModel: ObservableObject {
         }
     }
 
-    func saveCurrentTimestampAndStart() {
-        let now = Date()
-        store.set(now, forKey: key)
-        updateElapsedTime(from: now)
-        startTimer(from: now)
-    }
+//    func saveCurrentTimestampAndStart() {
+//        let now = Date()
+//        store.set(now, forKey: key)
+//        updateElapsedTime(from: now)
+//        startTimer(from: now)
+//    }
 
     func stopTimer() {
         timer?.cancel()
@@ -57,5 +57,12 @@ final class CountdownTimerViewModel: ObservableObject {
         store.remove(forKey: key)
         elapsedTime = 0
         stopTimer()
+    }
+    
+    func formatTime(_ interval: TimeInterval) -> String {
+        let seconds = Int(interval) % 60
+        let minutes = (Int(interval) / 60) % 60
+        let hours = Int(interval) / 3600
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

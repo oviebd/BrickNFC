@@ -20,6 +20,7 @@ class AppBlockerViewModel: ObservableObject {
     @Published var canBlock : Bool = false
     
     let appBlockingUserDefaultDataManager = AppBlockerUserDefaultDataManager.shared
+    private let store = UserDefaultDataStoreManager.shared
     
     init () {
         loadBlockingState()
@@ -53,7 +54,9 @@ class AppBlockerViewModel: ObservableObject {
         
         if isBlocking {
             blockSelectedApps()
+            store.set( Date(), forKey:  AppConstants.UserDefaultsKeys.lastActionTimestamp)
         }else{
+            store.remove(forKey: AppConstants.UserDefaultsKeys.lastActionTimestamp)
             unblockApps()
         }
         

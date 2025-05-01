@@ -16,9 +16,9 @@ struct CountdownTimerView: View {
                    .font(.title)
                    .monospacedDigit()
 
-               Button("Start Timer") {
-                   viewModel.saveCurrentTimestampAndStart()
-               }
+//               Button("Start Timer") {
+//                   viewModel.saveCurrentTimestampAndStart()
+//               }
 
                Button("Reset") {
                    viewModel.reset()
