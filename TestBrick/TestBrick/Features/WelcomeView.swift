@@ -70,7 +70,7 @@ extension WelcomeView {
 
     var upperView: some View {
         VStack(spacing: 10) {
-            Text("WELCOME TO ⌘ BRICK")
+            Text("WELCOME TO ⌘ REBORN")
 
                 .font(.system(size: 25, design: .monospaced))
                 // .font(.system(.title, design: .monospaced))
@@ -90,8 +90,6 @@ extension WelcomeView {
         VStack(alignment: .leading, spacing: 5) {
             Text("""
             We believe technology should amplify your potential, not limit it.
-
-            As two 23 year olds, we built Brick because we found ourselves stuck in patterns with our phones that held us back.
 
             What started as a simple solution for our own distractions became a tool that changed how we engaged with technology, reclaiming our time and focus.
 

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AppSelectionView: View {
-   
     @StateObject private var viewModel = AppBlockerViewModel()
     @State private var showPicker = false
     @State private var goToLockUnLockView: Bool = false
@@ -104,12 +103,9 @@ extension AppSelectionView {
 
     var continueButton: some View {
         Button(action: {
-//            if viewModel.canBlock {
-//                goToLockUnLockView = true
-//            }
-
-            goToLockUnLockView = true
-
+            if viewModel.canBlock {
+                goToLockUnLockView = true
+            }
         }) {
             HStack {
                 Spacer()

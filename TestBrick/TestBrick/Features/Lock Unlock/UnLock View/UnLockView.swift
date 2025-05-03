@@ -65,7 +65,7 @@ extension UnLockView {
         HStack(alignment: .center, spacing: 50) {
            
 
-            Text("ACTIVATE\nYOUR BRICK")
+            Text("ACTIVATE\nYOUR REBORN")
                 .font(.system(.largeTitle, design: .monospaced))
                 .bold()
                 .multilineTextAlignment(.center)
@@ -77,7 +77,7 @@ extension UnLockView {
     }
 
     var detalis: some View {
-        Text(" Tap the button below, and then\ntap the top of your phone to\nyour Brick to activate.")
+        Text(" Tap the button below, and then\ntap the top of your phone to\nyour Reborn to activate.")
             .font(.system(.body, design: .monospaced))
             .foregroundColor(.white.opacity(0.8))
             .multilineTextAlignment(.center)
@@ -105,7 +105,7 @@ extension UnLockView {
             // Show explanation
            
         }) {
-            Text("Don't have a Brick?")
+            Text("Don't have a Reborn?")
                 .font(.system(.subheadline, design: .monospaced))
                 .foregroundColor(.white.opacity(0.8))
                 .underline()

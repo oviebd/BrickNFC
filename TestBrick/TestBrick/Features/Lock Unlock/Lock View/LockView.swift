@@ -68,7 +68,7 @@ extension LockView {
 extension LockView {
     var topView: some View {
         HStack(alignment: .center, spacing: 50) {
-            Text("DEACTIVATE\nYOUR BRICK")
+            Text("DEACTIVATE\nYOUR REBORN")
                 .font(.system(.largeTitle, design: .monospaced))
                 .bold()
                 .multilineTextAlignment(.center)
@@ -93,7 +93,7 @@ extension LockView {
     }
 
     var detalis: some View {
-        Text(" Tap the button below, and then\ntap the top of your phone to\nyour Brick to activate.")
+        Text(" Tap the button below, and then\ntap the top of your phone to\nyour Reborn to activate.")
             .font(.system(.body, design: .monospaced))
             .foregroundColor(.white.opacity(0.8))
             .multilineTextAlignment(.center)
@@ -119,7 +119,7 @@ extension LockView {
     var brickButton: some View {
         Button(action: {
         }) {
-            Text("Don't have a Brick?")
+            Text("Don't have a Reborn?")
                 .font(.system(.subheadline, design: .monospaced))
                 .foregroundColor(.white.opacity(0.8))
                 .underline()
