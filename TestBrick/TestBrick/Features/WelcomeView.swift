@@ -13,7 +13,7 @@ struct WelcomeView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 10) {
           
             upperView
             Spacer()
@@ -78,7 +78,7 @@ extension WelcomeView {
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
 
-            Text("YOUR PHONE IS ABOUT TO\nBECOME A TOOL AGAIN")
+            Text("YOUR PHONE IS ABOUT TO BECOME YOUR ALLY AGAIN")
                 .font(.system(.headline, design: .monospaced))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.white.opacity(0.8))
@@ -87,19 +87,28 @@ extension WelcomeView {
     }
 
     var middleView: some View {
+        
         VStack(alignment: .leading, spacing: 5) {
-            Text("""
-            We believe technology should amplify your potential, not limit it.
+            
+            ScrollView (){
+                Text("""
+                We believe tech should serve your growth — not steal your time.
 
-            What started as a simple solution for our own distractions became a tool that changed how we engaged with technology, reclaiming our time and focus.
+                At 21, we created Reborn after realizing how often our phones were pulling us away from the life we wanted.
+                
+                What began as a personal fix became a powerful way to take back control, helping us reconnect with focus, energy, and real goals.
 
-            Our goal is to help you transform your relationship with tech, empowering you to pursue what truly matters. Brick is just the start.
+                Our mission is to help you shift how you use technology — so it pushes you forward instead of holding you back. Reborn is only the beginning.
 
-            We're excited to see how you use it.
-            """)
-            .font(.system(.body, design: .monospaced))
-            .foregroundStyle(.white.opacity(0.8))
-            .multilineTextAlignment(.leading)
+                We can’t wait to see what you’ll do with it.
+                """)
+                //.font(.system(size: 18, design: .monospaced))
+                .font(.system(.body, design: .monospaced))
+                .foregroundStyle(.white.opacity(0.8))
+                .multilineTextAlignment(.leading)
+            }.scrollIndicators(.hidden)
+            
+          
         }
         .padding(.horizontal)
     }
