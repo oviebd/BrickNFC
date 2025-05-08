@@ -45,21 +45,21 @@ struct UnLockView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 CustomTopToolbar(showBackButton: false)
+            }
+
+            // Settings button on the right
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    print("Setting pressed")
+                    goSettingView = true
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .background(Circle().fill(Color.gray.opacity(0.3)))
+                        .font(.system(size: 10, weight: .bold))
                 }
-                
-                // Settings button on the right
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        print("Setting pressed")
-                        goSettingView = true
-                    } label: {
-                        Image(systemName: "gearshape.fill")
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(Circle().fill(Color.gray.opacity(0.3)))
-                            .font(.system(size: 10, weight: .bold))
-                    }
-                }
+            }
         }
     }
 }
@@ -80,10 +80,9 @@ extension UnLockView {
 }
 
 #Preview {
-    NavigationStack{
+    NavigationStack {
         UnLockView()
     }
-    
 }
 
 extension UnLockView {
@@ -95,7 +94,6 @@ extension UnLockView {
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal)
-
         }
         .foregroundColor(.white)
     }
@@ -126,7 +124,9 @@ extension UnLockView {
 
     var brickButton: some View {
         Button(action: {
-            // Show explanation
+            if let url = URL(string: AppConstants.AppURLs.rebornURL) {
+                UIApplication.shared.open(url)
+            }
 
         }) {
             Text("Don't have a Reborn?")

@@ -118,6 +118,9 @@ extension LockView {
 
     var brickButton: some View {
         Button(action: {
+            if let url = URL(string: AppConstants.AppURLs.rebornURL) {
+                UIApplication.shared.open(url)
+            }
         }) {
             Text("Don't have a Reborn?")
                 .font(.system(.subheadline, design: .monospaced))

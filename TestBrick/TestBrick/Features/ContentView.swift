@@ -11,7 +11,8 @@ struct ContentView: View {
     @AppStorage(AppConstants.UserDefaultsKeys.isLoggedIn) private var isLoggedIn: Bool = false
 
     @AppStorage(AppConstants.UserDefaultsKeys.isBlocking) private var isInBlockingState: Bool = false
-
+  
+    
     var body: some View {
         NavigationStack {
             Group {
@@ -27,7 +28,8 @@ struct ContentView: View {
                     }
                 }
             }
-        }.tint(.white)
+        }.id(isLoggedIn)
+        .tint(.white)
     }
 }
 

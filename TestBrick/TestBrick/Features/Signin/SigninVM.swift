@@ -11,9 +11,10 @@ class SigninVM: ObservableObject {
    
     @Published var email: String = ""
     @Published var goToWelcomeView: Bool = false
-    
+       
     private let profileManager = UserProfileManager.shared
     let firebaseManager = FirestoreUserManager()
+    
     
     func onSigninButtonPressed(){
         

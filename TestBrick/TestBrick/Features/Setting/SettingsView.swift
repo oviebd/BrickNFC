@@ -12,12 +12,13 @@ import Firebase
 import SwiftUI
 
 struct SettingsView: View {
+   
     @State private var showAlert = false
     @State private var deletionSuccess = false
     @State private var deletionError: String?
 
     let firebaseManager = FirestoreUserManager()
-
+   
     //  @AppStorage(AppConstants.UserDefaultsKeys.isLoggedIn) private var isLoggedIn: Bool = true
 
     let profileManager = UserProfileManager.shared
@@ -48,12 +49,7 @@ struct SettingsView: View {
                 }
             }
         }
-        //.navigationBarBackButtonHidden(true)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                CustomTopToolbar(showBackButton: true)
-//            }
-//        }
+
     }
 
     func deleteUserData() {
@@ -70,6 +66,7 @@ struct SettingsView: View {
                 deletionSuccess = true
                 deletionError = nil
                 profileManager.logout()
+               
             }
         }
     }

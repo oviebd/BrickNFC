@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct SignInView: View {
-    @StateObject var signInVm = SigninVM()
+    
+    @StateObject var signInVm : SigninVM = SigninVM()
 
+   
+    
     var body: some View {
         VStack(spacing: 20) {
             // arrowAndtitle

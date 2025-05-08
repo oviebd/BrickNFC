@@ -25,6 +25,10 @@ struct AppConstants {
         static let lastActionTimestamp = "last_action_timestamp"
         static let isBlocking = "is_blocking_enabled"
     }
+    
+    struct AppURLs{
+        static let rebornURL = "https://google.com"
+    }
 
     // MARK: - Notification Names
 //    struct Notifications {
