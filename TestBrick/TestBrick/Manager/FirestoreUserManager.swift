@@ -24,6 +24,14 @@ final class FirestoreUserManager {
         }
     }
 
+    
+     func deleteUserProfile(email: String, completion: @escaping (Error?) -> Void) {
+         db.collection(collectionName)
+           .document(email)
+           .delete(completion: completion)
+     }
+
+    
     func fetchUserProfile(email: String, completion: @escaping (Result<UserProfileData, Error>) -> Void) {
         db.collection(collectionName)
             .document(email)

@@ -39,6 +39,7 @@ final class UserProfileManager {
 
     func logout() {
         store.remove(forKey: key)
+        store.set(false, forKey: AppConstants.UserDefaultsKeys.isLoggedIn)
     }
 
     func exists() -> Bool {

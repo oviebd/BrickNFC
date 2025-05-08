@@ -19,6 +19,7 @@ struct AppConstants {
 
     // MARK: - UserDefaults Keys
     struct UserDefaultsKeys {
+        static let userEmail = "userEmail"
         static let isLoggedIn = "isLoggedIn"
         static let userProfileInfo = "userProfileInfo"
         static let lastActionTimestamp = "last_action_timestamp"
