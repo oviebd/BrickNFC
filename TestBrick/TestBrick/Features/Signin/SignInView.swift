@@ -9,39 +9,48 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @StateObject var signInVm : SigninVM = SigninVM()
-
-   
+    @StateObject var signInVm: SigninVM = SigninVM()
     
     var body: some View {
-        VStack(spacing: 20) {
-            // arrowAndtitle
-
-            description
-
-            Spacer()
-
-            textFieldForEmail
-
-            signInButton
-            Spacer()
-        }
-
-        .navigationDestination(isPresented: $signInVm.goToWelcomeView) {
-            WelcomeView()
-        }
-
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("Sign In")
-                    .font(.system(.largeTitle, design: .monospaced))
-                    .bold()
-                    .foregroundColor(.white)
+        ZStack {
+            VStack(spacing: 20) {
+                description
+                Spacer()
+                textFieldForEmail
+                signInButton
+                Spacer()
+            }
+            .padding(.top, 40)
+            .background(Color.darkGray.ignoresSafeArea())
+            .navigationDestination(isPresented: $signInVm.goToWelcomeView) {
+                WelcomeView()
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Sign In")
+                        .font(.system(.largeTitle, design: .monospaced))
+                        .bold()
+                        .foregroundColor(.white)
+                }
+            }
+            
+            // Loading overlay
+            if signInVm.isLoading {
+                Color.black
+                    .ignoresSafeArea()
+                    .opacity(0.8)
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(2)
             }
         }
-
-        .padding(.top, 40)
-        .background(Color.darkGray.ignoresSafeArea())
+        .alert(isPresented: $signInVm.showErrorAlert) {
+            Alert(
+                title: Text("Sign-In Failed"),
+                message: Text(signInVm.alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 

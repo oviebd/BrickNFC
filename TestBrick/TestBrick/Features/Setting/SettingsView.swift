@@ -8,19 +8,13 @@
 import Firebase
 import SwiftUI
 
-import Firebase
-import SwiftUI
-
 struct SettingsView: View {
-   
+  
     @State private var showAlert = false
-    @State private var deletionSuccess = false
-    @State private var deletionError: String?
+    @State private var showLoading = false
+    @State private var deletionErrorMessage: String?
 
     let firebaseManager = FirestoreUserManager()
-   
-    //  @AppStorage(AppConstants.UserDefaultsKeys.isLoggedIn) private var isLoggedIn: Bool = true
-
     let profileManager = UserProfileManager.shared
 
     var body: some View {
@@ -48,25 +42,42 @@ struct SettingsView: View {
                     Text("This will permanently delete all your data.")
                 }
             }
-        }
 
+            if showLoading {
+                Color.black
+                    .ignoresSafeArea()
+                    .opacity(0.8)
+
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(2)
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Alert"),
+                message: Text(deletionErrorMessage ?? "Unknown Error"),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 
     func deleteUserData() {
         guard let userEmail = profileManager.fetch()?.email else {
+            deletionErrorMessage = "Could not find user email."
             return
         }
 
-        firebaseManager.deleteUserProfile(email: userEmail) { error in
-            if let error = error {
-                deletionError = error.localizedDescription
-                deletionSuccess = false
+        showLoading = true
 
-            } else {
-                deletionSuccess = true
-                deletionError = nil
-                profileManager.logout()
-               
+        firebaseManager.deleteUserProfile(email: userEmail) { error in
+            DispatchQueue.main.async {
+                showLoading = false
+                if let error = error {
+                    deletionErrorMessage = error.localizedDescription
+                } else {
+                    profileManager.logout()
+                }
             }
         }
     }

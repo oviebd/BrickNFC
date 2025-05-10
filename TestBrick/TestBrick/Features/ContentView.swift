@@ -12,7 +12,6 @@ struct ContentView: View {
 
     @AppStorage(AppConstants.UserDefaultsKeys.isBlocking) private var isInBlockingState: Bool = false
   
-    
     var body: some View {
         NavigationStack {
             Group {

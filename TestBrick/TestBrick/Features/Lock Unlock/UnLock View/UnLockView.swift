@@ -16,6 +16,10 @@ struct UnLockView: View {
     @StateObject var vm = LockUnlockVM()
     @State private var goSettingView: Bool = false
 
+    // Shared alert state
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Color.darkGray.ignoresSafeArea()
@@ -61,6 +65,40 @@ struct UnLockView: View {
                 }
             }
         }
+        .onReceive(nfcReader.$showAlert) { value in
+            if value {
+                alertMessage = nfcReader.alertMessage
+                showAlert = true
+                nfcReader.showAlert = false // Reset to prevent repeated trigger
+            }
+        }
+        .onReceive(appBlockerVM.$showAlert) { value in
+            if value {
+                alertMessage = appBlockerVM.alertMessage
+                showAlert = true
+                appBlockerVM.showAlert = false
+            }
+        }
+        .alert("Alert", isPresented: $showAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(alertMessage)
+        }
+
+//        .alert(isPresented: $nfcReader.showAlert) {
+//            Alert(
+//                title: Text("Alert"),
+//                message: Text(nfcReader.alertMessage),
+//                dismissButton: .default(Text("OK"))
+//            )
+//        }
+//        .alert(isPresented: $appBlockerVM.showAlert) {
+//            Alert(
+//                title: Text("Alert"),
+//                message: Text(appBlockerVM.alertMessage),
+//                dismissButton: .default(Text("OK"))
+//            )
+//        }
     }
 }
 

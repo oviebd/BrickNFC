@@ -27,7 +27,7 @@ struct AppConstants {
     }
     
     struct AppURLs{
-        static let rebornURL = "https://google.com"
+        static let rebornURL = "https://getreborn.app/"
     }
 
     // MARK: - Notification Names

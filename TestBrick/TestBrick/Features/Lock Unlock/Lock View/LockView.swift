@@ -13,6 +13,7 @@ struct LockView: View {
     @StateObject private var nfcReader = NFCReader()
     @StateObject private var appBlockerVM = AppBlockerViewModel()
     @StateObject var vm = LockUnlockVM()
+
     @StateObject private var countDownVM = CountdownTimerViewModel()
 
     var body: some View {
@@ -42,6 +43,13 @@ struct LockView: View {
                 countDownVM.startOrResumeTimer()
             }
         }
+        .alert(isPresented: $nfcReader.showAlert) {
+            Alert(
+                title: Text("Alert"),
+                message: Text(nfcReader.alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 
@@ -55,6 +63,7 @@ extension LockView {
             if isValid {
                 appBlockerVM.setBlocking(isBlock: false)
             } else {
+                vm.showAlert = true
                 vm.alertMessae = "Wrong Tag!. Please use valid tag"
             }
         }
